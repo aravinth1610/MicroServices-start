@@ -1,0 +1,33 @@
+package com.inventory.controller;
+
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.inventory.services.InventoryServices;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/inventory")
+public class InventoryController {
+
+	private final InventoryServices inventoryServices;
+
+	// http://localhost:8082/api/inventory?skuCode=iphone-13&skuCode=iphone13-red
+
+	@GetMapping("/ist-stock")
+	@Transactional(readOnly = true)
+	private ResponseEntity<?> isInStock() {
+		return new ResponseEntity<Boolean>(inventoryServices.isInStock(skuCode), HttpStatus.OK);
+	}
+
+}

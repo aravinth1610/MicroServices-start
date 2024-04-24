@@ -1,0 +1,26 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3302/msorder
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        formatSql: true
+    hibernate:
+      ddl-auto: update        
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0      

@@ -1,0 +1,26 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    username: root
+    password: my-secret-pw
+    url: jdbc:mariadb://localhost:3301/msinventory
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        formatSql: true
+    hibernate:
+      ddl-auto: update        
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0      

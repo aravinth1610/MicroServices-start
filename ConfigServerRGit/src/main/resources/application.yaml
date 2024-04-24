@@ -1,0 +1,13 @@
+#The Entire Config is GET,it will get a GITHUB link or GIT link where get all configuration
+#This is config server all the API will be done.
+#we can done by in GIT
+
+server:
+  port: 8088
+  
+spring:
+  profiles:
+    active:
+    - native  
+  
+  

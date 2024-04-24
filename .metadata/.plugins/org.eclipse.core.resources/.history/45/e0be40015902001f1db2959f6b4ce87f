@@ -1,0 +1,47 @@
+package com.inventory.services;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.inventory.entity.Inventory;
+import com.inventory.repository.InventoryRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class InventoryServices {
+
+	private InventoryRepository inventoryRepo;
+	
+	@Transactional(readOnly = true)
+	public Boolean isInStock(List<String> skuCode) {
+		
+		System.out.println(skuCode);
+		
+//		Inventory in = new Inventory();
+//		in.setSkuCode("rm-12-max");
+//		in.setQuantity(0);
+//		in.setSkuCode("rm-1;
+//		in.setQuantity(2);
+//		inventoryRepo.save(in);
+		
+		 inventoryRepo.findBySkuCodeIn(skuCode).stream().map(Inventory::getSkuCode).allMatch(InventoryServices::isAvailable);
+		 
+		 return null;
+	}
+	public  boolean isAvailable(String skuCode) {
+	    // Assuming availability is determined by checking if the SKU code exists in the inventory
+	    // You would replace this with your actual logic to check availability
+
+	    // Example: Check if the SKU code exists in your inventory database
+	    // You may have to call another method from your repository or service layer to perform this check
+	    boolean existsInInventory = inventoryRepo.existsBySkuCode(skuCode);
+
+	    return existsInInventory;
+	}
+	
+	
+}
